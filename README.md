@@ -57,5 +57,14 @@ Match Score
 
 Matched Keywords
 
+🧪 How to Use This:
+Copy this into an index.html file.
+
+Host it on GitHub Pages (create a repo, upload, enable GitHub Pages).
+
+You can now paste a resume or upload .txt, paste a job description, and click Analyze Resume.
+
+
+
 
 
