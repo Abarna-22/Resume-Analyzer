@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Resume Analyzer</title>
+  <style>
+    body { font-family: sans-serif; margin: 2rem; }
+    textarea { width: 100%; height: 150px; margin-bottom: 1rem; }
+    button { padding: 0.5rem 1rem; margin-top: 1rem; }
+    #results { margin-top: 2rem; }
+    .match { font-size: 1.2rem; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <h1>AI Resume Analyzer</h1>
+
+  <label>Paste Your Resume:</label>
+  <textarea id="resumeText" placeholder="Paste your resume here..."></textarea>
+
+  <label>Paste Job Description:</label>
+  <textarea id="jobText" placeholder="Paste job description here..."></textarea>
+
+  <button onclick="analyze()">Analyze Resume</button>
+
+  <div id="results"></div>
+
+  <script>
+    function analyze() {
+      const resume = document.getElementById("resumeText").value.toLowerCase();
+      const job = document.getElementById("jobText").value.toLowerCase();
+
+      if (!resume || !job) {
+        alert("Please paste both resume and job description.");
+        return;
+      }
+
+      const resumeWords = resume.split(/\W+/);
+      const jobWords = new Set(job.split(/\W+/));
+
+      let matchCount = 0;
+      let matchedKeywords = [];
+
+      jobWords.forEach(word => {
+        if (resumeWords.includes(word) && word.length > 3) {
+          matchCount++;
+          matchedKeywords.push(word);
+        }
+      });
+
+      const matchPercentage = ((matchCount / jobWords.size) * 100).toFixed(2);
+
+      document.getElementById("results").innerHTML = `
+        <p class="match">Match Score: ${matchPercentage}%</p>
+        <p><strong>Matched Keywords:</strong> ${matchedKeywords.join(", ")}</p>
+      `;
+    }
+  </script>
+</body>
+</html>
